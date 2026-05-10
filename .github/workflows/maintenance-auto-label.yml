@@ -23,6 +23,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450 # v2.19.1
+        with:
+          egress-policy: audit
+
       - name: Checkout the pull request
         uses: actions/checkout@v6
 
@@ -48,6 +53,11 @@ jobs:
 
     steps:
       # Checks out the repository to read files for matching with labeler config
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450 # v2.19.1
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
 
       # Applies labels based on the .github/labeler.yml config
@@ -62,6 +72,11 @@ jobs:
 
     steps:
       # Automatically adds size labels based on total changed lines
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450 # v2.19.1
+        with:
+          egress-policy: audit
+
       - name: Label by size
         uses: pascalgn/size-label-action@v0.5.7
         env:
@@ -81,6 +96,11 @@ jobs:
 
     steps:
       # Determines the label (02, 05, 08, 11) based on PR creation month
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@a5ad31d6a139d249332a2605b85202e8c0b78450 # v2.19.1
+        with:
+          egress-policy: audit
+
       - name: Determine quarter label
         env:
           PR_CREATED_AT: ${{ github.event.pull_request.created_at }}
